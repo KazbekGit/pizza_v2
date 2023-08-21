@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Categories = () => {
+const Categories = ({activeCatIndex, onCatClick}) => {
   const categories = [
     "Все",
     "Мясные",
@@ -9,10 +9,8 @@ const Categories = () => {
     "Острые",
     "Закрытые",
   ];
-  const onCatClick = (index) => {
-    setActiveCatIndex(index)
-  }
-  const [activeCatIndex, setActiveCatIndex] = useState(0);
+
+  
   return (
     <div className="categories">
       <ul>
