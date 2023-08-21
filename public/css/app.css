@@ -1,7 +1,9 @@
 @font-face {
   font-family: "Proxima Nova";
   src: url("./fonts/ProximaNova-Black.eot");
-  src: local("./fonts/Proxima Nova Black"), local("ProximaNova-Black"),
+  src:
+    local("./fonts/Proxima Nova Black"),
+    local("ProximaNova-Black"),
     url("./fonts/ProximaNova-Black.eot?#iefix") format("embedded-opentype"),
     url("./fonts/ProximaNova-Black.woff") format("woff"),
     url("./fonts/ProximaNova-Black.ttf") format("truetype");
@@ -11,7 +13,9 @@
 @font-face {
   font-family: "Proxima Nova";
   src: url("./fonts/ProximaNova-Bold.eot");
-  src: local("./fonts/Proxima Nova Bold"), local("ProximaNova-Bold"),
+  src:
+    local("./fonts/Proxima Nova Bold"),
+    local("ProximaNova-Bold"),
     url("./fonts/ProximaNova-Bold.eot?#iefix") format("embedded-opentype"),
     url("./fonts/ProximaNova-Bold.woff") format("woff"),
     url("./fonts/ProximaNova-Bold.ttf") format("truetype");
@@ -21,7 +25,9 @@
 @font-face {
   font-family: "Proxima Nova";
   src: url("./fonts/ProximaNova-Regular.eot");
-  src: local("./fonts/Proxima Nova Regular"), local("ProximaNova-Regular"),
+  src:
+    local("./fonts/Proxima Nova Regular"),
+    local("ProximaNova-Regular"),
     url("./fonts/ProximaNova-Regular.eot?#iefix") format("embedded-opentype"),
     url("./fonts/ProximaNova-Regular.woff") format("woff"),
     url("./fonts/ProximaNova-Regular.ttf") format("truetype");
@@ -31,7 +37,9 @@
 @font-face {
   font-family: "Proxima Nova";
   src: url("./fonts/ProximaNova-Extrabld.eot");
-  src: local("./fonts/Proxima Nova Extrabold"), local("ProximaNova-Extrabld"),
+  src:
+    local("./fonts/Proxima Nova Extrabold"),
+    local("ProximaNova-Extrabld"),
     url("./fonts/ProximaNova-Extrabld.eot?#iefix") format("embedded-opentype"),
     url("./fonts/ProximaNova-Extrabld.woff") format("woff"),
     url("./fonts/ProximaNova-Extrabld.ttf") format("truetype");
@@ -78,9 +86,40 @@ h2 {
 a {
   text-decoration: none;
 }
+.back {
+  width: 100px;
+  height: 40px;
+
+  margin-top: 10px;
+  padding: 0 15px;
+
+  border: 1px solid grey;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  background-color: rgb(248, 207, 199);
+  color: tomato;
+
+  font-size: 12pt;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.back:hover {
+  background-color: rgb(253, 76, 36);
+  color: wheat;
+}
 .header {
   border-bottom: 1px solid #f6f6f6;
   padding: 40px 0;
+}
+.button {
+  text-align: center;
+  height: 40px;
+  width: 200px;
+
+  background-color: teal;
 }
 .header .container {
   display: -webkit-box;
@@ -119,9 +158,12 @@ a {
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: background-color 0.15s ease-in-out,
+  -webkit-transition:
+    background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
   border: 1px solid transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -691,10 +733,13 @@ body {
   stroke-width: 2;
 }
 .cart__bottom-buttons .pay-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 16px;
   font-weight: 600;
   width: 210px;
-  padding: 16px;
+  padding: 0 16px;
 }
 .cart--empty {
   margin: 0 auto;
