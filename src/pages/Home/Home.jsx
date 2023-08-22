@@ -14,8 +14,10 @@ const Home = () => {
 
   const fetchCategoryIndex =
     activeCatIndex > 0 ? "category=" + activeCatIndex : "";
-  
+
   const fetchPizzas = () => {
+    setIsLoading(false);
+
     try {
       fetch(
         `https://64db6924593f57e435b0ec78.mockapi.io/pizzas?` +
