@@ -340,6 +340,16 @@ a {
   border-bottom: 1px dashed #fe5f1e;
   cursor: pointer;
 }
+
+.search {
+  width: 250px;
+  min-height: 40px;
+  padding: 0 15px;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12pt;
+}
+
 .sort__popup {
   position: absolute;
   right: 0;
@@ -350,7 +360,7 @@ a {
   border-radius: 10px;
   overflow: hidden;
   padding: 10px 0;
-  width: 160px;
+  width: 180px;
 }
 .sort__popup ul {
   overflow: hidden;

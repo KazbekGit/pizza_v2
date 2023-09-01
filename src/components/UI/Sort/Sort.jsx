@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 
-const Sort = ({ sortTypeIndex, onSortClick }) => {
-  const sortTypes = ["популярности", "цене", "алфавиту"];
+const Sort = ({ sortType, onSortClick }) => {
+  const sortTypes = [
+    { order: "rating", title: "популярности(max)" },
+    { order: "-rating", title: "популярности(min)" },
+    { order: "price", title: "цене(max)" },
+    { order: "-price", title: "цене(min)" },
+    { order: "name", title: "алфавиту" },
+  ];
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   return (
@@ -20,22 +26,24 @@ const Sort = ({ sortTypeIndex, onSortClick }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsSortOpen(true)}>{sortTypes[sortTypeIndex]}</span>
+        <span onClick={() => setIsSortOpen(true)}>{sortType.title}</span>
       </div>
       {isSortOpen && (
         <div className="sort__popup">
           <ul>
-            {sortTypes.map((sortType, index) => {
+            {sortTypes.map((currentSortType) => {
               return (
                 <li
-                  key={sortType}
+                  key={currentSortType.title}
                   onClick={() => {
-                    onSortClick(index);
+                    onSortClick(currentSortType);
                     setIsSortOpen(false);
                   }}
-                  className={index === sortTypeIndex ? "active" : ""}
+                  className={
+                    currentSortType.order === sortType.order ? "active" : ""
+                  }
                 >
-                  {sortType}
+                  {currentSortType.title}
                 </li>
               );
             })}
