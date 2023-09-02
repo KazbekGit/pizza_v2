@@ -4,31 +4,44 @@ import Sort from "../../components/UI/Sort/Sort";
 import PizzaBlock from "../../components/UI/PizzaBlock.jsx/PizzaBlock";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import { SearchContext } from "../../App";
+import Pagination from "../../components/UI/Pagination";
 
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = React.useContext(SearchContext);
   const [activeCatIndex, setActiveCatIndex] = useState(0);
-  
+
   const [sortType, setSortType] = useState({
-    order: "rating", title: "популярности(max)"
+    order: "rating",
+    title: "популярности(max)",
   });
-  
+
   const fetchCategoryIndex =
-  activeCatIndex > 0 ? "category=" + activeCatIndex + "&" : "";
-  const sortOrder = sortType.order.includes("-") ? "desc" : "asc" 
+    activeCatIndex > 0 ? "category=" + activeCatIndex + "&" : "";
+  const sortOrder = sortType.order.includes("-") ? "desc" : "asc";
   const sortProperty = sortType.order.replace("-", "");
-  const search = `&search=${searchValue}`
-  console.log(search)
-  
+  const search = `&search=${searchValue}`;
+  const currPage = `&page=${currentPage}`;
+  const itemsPerPage = 4;
+  const allItemsQuantity = 10;
+  const iPerPage = `&limit=${itemsPerPage}`;
+
   const fetchPizzas = () => {
     setIsLoading(false);
-    
+
     try {
       fetch(
         `https://64db6924593f57e435b0ec78.mockapi.io/pizzas?` +
-          fetchCategoryIndex + "sortBy=" + sortProperty + "&order=" + sortOrder + search
+          fetchCategoryIndex +
+          "sortBy=" +
+          sortProperty +
+          "&order=" +
+          sortOrder +
+          search + 
+          currPage + 
+          iPerPage
       )
         .then((res) => res.json())
         .then((json) => setPizzas(json));
@@ -40,12 +53,12 @@ const Home = () => {
   };
 
   const fetchSort = (sortType) => {
-    setSortType(sortType)
-  }
+    setSortType(sortType);
+  };
 
   useEffect(() => {
     fetchPizzas();
-  }, [activeCatIndex, sortType, searchValue]);
+  }, [activeCatIndex, sortType, searchValue, currPage]);
   return (
     <>
       <div className="content__top">
@@ -53,10 +66,7 @@ const Home = () => {
           activeCatIndex={activeCatIndex}
           onCatClick={(index) => setActiveCatIndex(index)}
         />
-        <Sort
-          sortType={sortType}
-          onSortClick={fetchSort}
-        />
+        <Sort sortType={sortType} onSortClick={fetchSort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
@@ -68,6 +78,12 @@ const Home = () => {
               return <PizzaBlock {...pizza} key={pizza.id} />;
             })}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        itemsPerPage={itemsPerPage}
+        allItemsQuantity={allItemsQuantity}
+      />
     </>
   );
 };
