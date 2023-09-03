@@ -6,17 +6,19 @@ import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import { SearchContext } from "../../App";
 import Pagination from "../../components/UI/Pagination";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setSortType } from "../../redux/slices/sortSlice";
+import { setActiveCatIndex } from "../../redux/slices/filterSlice";
+
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = React.useContext(SearchContext);
-  const [activeCatIndex, setActiveCatIndex] = useState(0);
 
-  const [sortType, setSortType] = useState({
-    order: "rating",
-    title: "популярности(max)",
-  });
+  const sortType = useSelector((store) => store.sort.sortType);
+  const activeCatIndex = useSelector((store) => store.filter.activeCatIndex);
+  const dispatch = useDispatch();
 
   const fetchCategoryIndex =
     activeCatIndex > 0 ? "category=" + activeCatIndex + "&" : "";
@@ -39,8 +41,8 @@ const Home = () => {
           sortProperty +
           "&order=" +
           sortOrder +
-          search + 
-          currPage + 
+          search +
+          currPage +
           iPerPage
       )
         .then((res) => res.json())
@@ -53,7 +55,7 @@ const Home = () => {
   };
 
   const fetchSort = (sortType) => {
-    setSortType(sortType);
+    dispatch(setSortType(sortType));
   };
 
   useEffect(() => {
@@ -64,7 +66,7 @@ const Home = () => {
       <div className="content__top">
         <Categories
           activeCatIndex={activeCatIndex}
-          onCatClick={(index) => setActiveCatIndex(index)}
+          onCatClick={(index) => dispatch(setActiveCatIndex(index))}
         />
         <Sort sortType={sortType} onSortClick={fetchSort} />
       </div>
